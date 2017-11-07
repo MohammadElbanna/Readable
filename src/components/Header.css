@@ -1,0 +1,9 @@
+.header {
+  border-bottom: 1px solid #e9eaee;
+  background-color: #fff;
+  composes: mainPadding from "../App.css";
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 27px;
+  font-weight: bold;
+}

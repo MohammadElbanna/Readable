@@ -1,0 +1,17 @@
+.mainPageControlsContainer {
+  display: flex;
+  justify-content: space-between;
+  width: calc(75% - 20px);
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.sortByLabel {
+  padding-right: 5px;
+}
+
+.inputContainer {
+  display: inline-block;
+  margin: 0;
+  padding-left: 10px;
+}

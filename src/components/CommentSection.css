@@ -1,0 +1,30 @@
+.wrapper {
+  margin-top: 50px;
+}
+
+.commentSectionHeader {
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.commentSectionBody {
+  margin-bottom: 10px;
+  border: 1px solid #edeef1;
+  background: #fff;
+  min-height: 100px;
+  padding: 25px;
+  margin: 0 auto;
+  margin-top: 1px;
+}
+
+.inputWrapper {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #edeef1;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.inputWrapper a {
+  margin-left: 0;
+}

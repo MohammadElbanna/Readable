@@ -1,0 +1,50 @@
+.categoryItem:not(:last-child):after {
+  content: " ";
+  display: block;
+  border: 1px solid #edeef1;
+  width: 35%;
+  margin: 15px auto 0;
+}
+
+.categoryItem {
+  text-align: center;
+  margin-top: 15px;
+  padding: 0 10px;
+}
+
+.categoryItem:last-child {
+  margin-bottom: 15px;
+}
+
+.categoryItem a {
+  text-decoration: none;
+  color: #000;
+  font-style: italic;
+}
+
+.categoriesAside {
+  border: 1px solid #edeef1;
+  background: #fff;
+  width: 25%;
+  min-width: 150px;
+}
+
+.header {
+  text-align: center;
+  margin: 0;
+  border-bottom: 1px solid #edeef1;
+  padding: 10px 5px;
+  color: #434c5b;
+}
+
+.categoriesList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.selectedCategory {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 18px;
+}

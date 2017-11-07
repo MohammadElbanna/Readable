@@ -1,0 +1,45 @@
+.wrapper:not(:last-child) {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #edeef1;
+  padding-bottom: 20px;
+}
+
+.commentHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.commentHeader i {
+  font-size: 20px;
+}
+
+.author {
+  color: #434c5b;
+  font-size: 15px;
+  padding-right: 10px;
+}
+
+.time {
+  color: #a1a8af;
+  font-size: 14px;
+  padding-right: 40px;
+}
+
+.body {
+  margin: 8px 0;
+}
+
+.numberOfVotes {
+  color: limegreen;
+  font-size: 14px;
+}
+
+.commentAction {
+  color: #8f949d;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+.commentAction:hover {
+  color: #000;
+}

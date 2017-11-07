@@ -1,0 +1,9 @@
+.footer {
+  composes: mainPadding from "../App.css";
+  border-top: 1px solid #e9eaee;
+  background-color: #fff;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  font-size: 12px;
+  margin-top: 40px;
+}

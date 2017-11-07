@@ -1,4 +1,4 @@
-import { FETCH_POSTS_SUCCESS } from "../actions";
+import { FETCH_COMMENTS_SUCCESS } from "../actions";
 
 export const commentsById = (state = {}, action) => {
   switch (action.type) {
