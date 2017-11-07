@@ -1,0 +1,14 @@
+.wrapper {
+  composes: mainPadding from "../App.css";
+  composes: main from "../App.css";
+}
+
+.main {
+  display: flex;
+  align-items: flex-start;
+}
+
+.posts {
+  width: calc(75% - 20px);
+  margin-right: 20px;
+}

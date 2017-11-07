@@ -1,0 +1,4 @@
+.wrapper {
+  composes: mainPadding from "../App.css";
+  composes: main from "../App.css";
+}
