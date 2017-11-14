@@ -1,47 +1,67 @@
 import React, { Component } from "react";
 import styles from "./CommentModal.css";
 import Modal from "react-modal";
-import { connect } from "react-redux";
 import Button from "./Button";
+import { v4 } from "uuid";
 
 class CommentModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      comment: "",
-      input: ""
+      comment: props.modalComment.body || "",
+      author: props.modalComment.author || ""
     };
   }
 
-  handleAuthorChange = event => {
+  handleInputChange = event => {
     this.setState({
-      input: event.target.value
+      [event.target.name]: event.target.value
     });
   };
 
-  handleCommentChange = event => {
-    this.setState({
-      comment: event.target.value
-    });
+  saveComment = e => {
+    e.preventDefault();
+    const currentCommentId = this.props.modalComment.id;
+    const timestamp = Date.now();
+    if (currentCommentId) {
+      this.props.onEdit(currentCommentId, this.state.comment, timestamp);
+    } else {
+      this.props.onNew({
+        id: v4(),
+        author: this.state.author,
+        body: this.state.comment,
+        parentId: this.props.postId,
+        timestamp
+      });
+    }
   };
 
   render() {
+    let currentComment = this.props.modalComment || {};
     return (
       <Modal
         className="modal"
         overlayClassName="overlay"
-        isOpen={this.props.renderModal}
+        isOpen={this.props.open}
         contentLabel="Modal"
       >
-        <h2 className={styles.header}>Add New Comment</h2>
-        <form>
-          <label className={styles.label}>Author</label>
-          <input
-            className={styles.input}
-            placeholder="Author name"
-            value={this.state.author}
-            onChange={this.handleAuthorChange}
-          />
+        <h2 className={styles.header}>
+          {currentComment.body ? "Edit Comment" : "Add New Comment"}
+        </h2>
+        <form onSubmit={this.saveComment}>
+          {!currentComment.body && (
+            <label className={styles.label}>Author</label>
+          )}
+          {!currentComment.body && (
+            <input
+              className={styles.input}
+              placeholder="Author name"
+              value={this.state.author}
+              name="author"
+              onChange={this.handleInputChange}
+              required
+            />
+          )}
 
           <label className={styles.label}>Comment</label>
           <textarea
@@ -49,19 +69,23 @@ class CommentModal extends Component {
             rows="5"
             placeholder="Enter your comment here..."
             value={this.state.comment}
-            onChange={this.handleCommentChange}
+            name="comment"
+            onChange={this.handleInputChange}
+            required
           />
 
-          <Button type="save" />
+          <Button type="primary" text="Save" htmlType="submit" />
+          <Button
+            type="secondary"
+            text="Cancel"
+            htmlType="button"
+            onClick={this.props.closeCommentModal}
+          />
         </form>
       </Modal>
     );
   }
 }
-
-const mapStateToProps = state => {
-  return {};
-};
 
 export default CommentModal;
 
