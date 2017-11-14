@@ -6,6 +6,10 @@
   display: inline-flex;
   box-shadow: 0px 0px 25px #e2dede;
   align-items: center;
+
+  font-size: inherit;
+  text-transform: inherit;
+  cursor: pointer;
 }
 
 .iconBtn:hover {
@@ -56,4 +60,10 @@
 .primaryButton {
   background: #3192e6;
   color: #fff;
+  margin-right: 15px;
+}
+
+.secondaryButton {
+  background: #e0e0e0;
+  color: #000;
 }

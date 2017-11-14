@@ -3,35 +3,51 @@ import styles from "./Post.css";
 import PostVotingControls from "./PostVotingControls";
 import Button from "./Button.js";
 import fontStyles from "font-awesome/css/font-awesome.css";
+import { Link } from "react-router-dom";
 
-const Post = props => {
+const Post = ({ match, ...props }) => {
+  let {
+    id,
+    title,
+    author,
+    body,
+    commentCount,
+    category,
+    timestamp,
+    voteScore
+  } = props.post;
+
+  timestamp = new Date(timestamp).toLocaleDateString();
+
   return (
-    <div className={styles.body}>
-      <div>
+    <div className={styles.postContainer}>
+      <div className={styles.body}>
         <div className={styles.postActions}>
-          {props.delete && <Button small type="delete" />}
-          {props.edit && <Button small type="edit" />}
+          {props.delete && (
+            <Button small type="delete" onClick={() => props.onDelete(id)} />
+          )}
+          {props.edit && (
+            <Button
+              small
+              type="edit"
+              onClick={() => props.openPostModal({ title, body, id })}
+            />
+          )}
           {props.view && <Button small type="view" />}
         </div>
-        <h3 className={styles.title}>This is my title</h3>
-        <span className={styles.info}>Posted by ELBANNA in DOWNLOADS</span>
-        <p className={styles.summary}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
-        </p>
+        <Link to={`/${category}/${id}`}>
+          <h3 className={styles.title}>{title}</h3>
+        </Link>
+        <span className={styles.info}>
+          Posted by {author} on {timestamp}
+        </span>
+        <p className={styles.summary}>{body}</p>
         <div className={styles.postBottomContainer}>
-          <a href="#" className={styles.postTag}>
-            java
-          </a>
+          <Link to={`/${category}`} className={styles.postTag}>
+            {category}
+          </Link>
           <span className={styles.commentsLink}>
-            45
+            {commentCount}
             <i
               className={`${fontStyles.fa} ${fontStyles["fa-comment"]}`}
               aria-hidden="true"
@@ -39,7 +55,11 @@ const Post = props => {
           </span>
         </div>
       </div>
-      <PostVotingControls />
+      <PostVotingControls
+        voteScore={voteScore}
+        onVoteChange={props.onVoteChange}
+        postId={id}
+      />
     </div>
   );
 };

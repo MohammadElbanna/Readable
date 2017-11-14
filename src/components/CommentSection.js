@@ -1,25 +1,58 @@
 import React from "react";
-import Modal from "react-modal";
 import styles from "./CommentSection.css";
 import Comment from "./Comment";
 import Button from "./Button";
 import CommentModal from "./CommentModal";
 
-const CommentSection = props => {
+const CommentSection = ({
+  isModalOpen,
+  commentById,
+  commentIds,
+  onVoteChange,
+  modalComment,
+  openCommentModal,
+  closeCommentModal,
+  onEditComment,
+  onNewComment,
+  onDeleteComment,
+  postId
+}) => {
   return (
     <div className={styles.wrapper}>
       <h4 className={styles.commentSectionHeader}>
-        Comments <span>(11)</span>
+        Comments <span>({commentIds.length})</span>
       </h4>
       <div className={styles.commentSectionBody}>
         <div className={styles.inputWrapper}>
-          <Button small type="comment" text="Add new comment" />
+          <Button
+            small
+            type="primary"
+            text="Add new comment"
+            onClick={() => openCommentModal()}
+          />
         </div>
-        <Comment />
-        <Comment />
+        {commentIds.map(commentId => (
+          <Comment
+            onVoteChange={onVoteChange}
+            key={commentId}
+            comment={commentById[commentId]}
+            openCommentModal={openCommentModal}
+            onDeleteComment={onDeleteComment}
+          />
+        ))}
+        {/* <Comment /> */}
       </div>
 
-      <CommentModal renderModal />
+      {isModalOpen && (
+        <CommentModal
+          open={isModalOpen}
+          modalComment={modalComment}
+          closeCommentModal={closeCommentModal}
+          postId={postId}
+          onEdit={onEditComment}
+          onNew={onNewComment}
+        />
+      )}
     </div>
   );
 };

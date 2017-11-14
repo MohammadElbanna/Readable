@@ -27,11 +27,23 @@
 
 .body {
   margin: 8px 0;
+  white-space: pre-wrap;
 }
 
-.numberOfVotes {
-  color: limegreen;
+.voteScore {
   font-size: 14px;
+}
+
+.voteScoreDown {
+  color: red;
+}
+
+.voteScoreUp {
+  color: limegreen;
+}
+
+.voteScoreZero {
+  color: #000;
 }
 
 .commentAction {
