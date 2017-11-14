@@ -3,21 +3,22 @@ import styles from "./PostVotingControls.css";
 import fontStyles from "font-awesome/css/font-awesome.css";
 
 const PostVotingControls = props => {
+  const { onVoteChange, postId, voteScore } = props;
   return (
     <div className={styles.container}>
-      <a href="#">
+      <span onClick={() => onVoteChange(true, postId)}>
         <i
           className={`${fontStyles.fa} ${fontStyles["fa-arrow-up"]}`}
           aria-hidden="true"
         />
-      </a>
-      <div className={styles.voteCount}>13</div>
-      <a href="#">
+      </span>
+      <div className={styles.voteScore}>{voteScore}</div>
+      <span onClick={() => onVoteChange(false, postId)}>
         <i
           className={`${fontStyles.fa} ${fontStyles["fa-arrow-down"]}`}
           aria-hidden="true"
         />
-      </a>
+      </span>
     </div>
   );
 };
