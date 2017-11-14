@@ -6,10 +6,11 @@ body {
 
 :global .modal {
   position: absolute;
-  top: 40px;
+  top: 60px;
   left: 200px;
   right: 200px;
-  bottom: 40px;
+  max-height: calc(100vh - 120px);
+  box-sizing: border-box;
   border: 1px solid rgb(204, 204, 204);
   background: rgb(255, 255, 255);
   overflow: auto;
