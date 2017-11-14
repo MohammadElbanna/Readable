@@ -1,18 +1,9 @@
-import { FETCH_CATEGORIES_SUCCESS } from "../actions";
+import { FETCH_CATEGORIES_SUCCESS } from "../actions/categories";
 
-export const categoriesById = (state = {}, action) => {
+export const categories = (state = [], action) => {
   switch (action.type) {
     case FETCH_CATEGORIES_SUCCESS:
-      return action.response;
-    default:
-      return state;
-  }
-};
-
-export const categoriesIds = (state = [], action) => {
-  switch (action.type) {
-    case FETCH_CATEGORIES_SUCCESS:
-      return action.response.forEach(cat => cat.id);
+      return action.response.categories;
     default:
       return state;
   }
