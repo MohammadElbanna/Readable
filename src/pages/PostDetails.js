@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { commentsByPostSelector } from "../reducers";
 import { Redirect, Route } from "react-router-dom";
 import PostModal from "../components/PostModal";
+import LoadingIndicator from "../components/LoadingIndicator";
 import NotFoundPage from "./NotFoundPage";
 import {
   fetchPost,
@@ -42,7 +43,7 @@ class PostDetails extends Component {
       post,
       changePostVoteScore,
       deletePost,
-      isFetching,
+      isFetchingPost,
       commentIds,
       commentById,
       isModalOpen,
@@ -54,7 +55,8 @@ class PostDetails extends Component {
       newComment,
       deleteComment,
       changeCommentVoteScore,
-      match
+      match,
+      isFetchingComments
     } = this.props;
 
     return (
@@ -69,23 +71,25 @@ class PostDetails extends Component {
             delete
           />
         )}
-        {post && (
-          <CommentSection
-            commentIds={commentIds}
-            commentById={commentById}
-            isModalOpen={isModalOpen}
-            modalComment={modalComment}
-            openCommentModal={openCommentModal}
-            closeCommentModal={closeCommentModal}
-            onEditComment={editComment}
-            onNewComment={newComment}
-            onDeleteComment={deleteComment}
-            onVoteChange={changeCommentVoteScore}
-            postId={post.id}
-          />
-        )}
+        {post &&
+          !isFetchingComments && (
+            <CommentSection
+              commentIds={commentIds}
+              commentById={commentById}
+              isModalOpen={isModalOpen}
+              modalComment={modalComment}
+              openCommentModal={openCommentModal}
+              closeCommentModal={closeCommentModal}
+              onEditComment={editComment}
+              onNewComment={newComment}
+              onDeleteComment={deleteComment}
+              onVoteChange={changeCommentVoteScore}
+              postId={post.id}
+            />
+          )}
+        {post && isFetchingComments && <LoadingIndicator />}
 
-        {!isFetching &&
+        {!isFetchingPost &&
           !post && <Route exact path={match.url} component={NotFoundPage} />}
 
         {post && post.deleted && <Redirect to="/" />}
@@ -109,11 +113,12 @@ const mapStateToProps = (state, props) => {
     postId: props.match.params.postId,
     commentById: state.commentById,
     commentIds: commentsByPostSelector(state),
-    isFetching: state.isFetching.post,
+    isFetchingPost: state.isFetching.post,
     isModalOpen: state.ui.commentModal.isOpen,
     modalComment: state.ui.commentModal.currentComment,
     isPostModalOpen: state.ui.postModal.isOpen,
-    currentPost: state.ui.postModal.currentPost
+    currentPost: state.ui.postModal.currentPost,
+    isFetchingComments: state.isFetching.comments
   };
 };
 

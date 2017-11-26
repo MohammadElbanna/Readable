@@ -4,6 +4,7 @@ import Post from "../components/Post";
 import CategoryAside from "../components/CategoryAside";
 import MainPageControls from "../components/MainPageControls";
 import NotFoundPage from "./NotFoundPage";
+import LoadingIndicator from "../components/LoadingIndicator";
 import PostModal from "../components/PostModal";
 import { connect } from "react-redux";
 import { Route } from "react-router-dom";
@@ -67,17 +68,21 @@ class Main extends Component {
 
               <main className={styles.main}>
                 <div className={styles.posts}>
-                  {postIds.map(postId => (
-                    <Post
-                      key={postId}
-                      post={posts[postId]}
-                      onVoteChange={changePostVoteScore}
-                      onDelete={deletePost}
-                      openPostModal={openPostModal}
-                      edit
-                      delete
-                    />
-                  ))}
+                  {this.props.isFetchingPosts ? (
+                    <LoadingIndicator />
+                  ) : (
+                    postIds.map(postId => (
+                      <Post
+                        key={postId}
+                        post={posts[postId]}
+                        onVoteChange={changePostVoteScore}
+                        onDelete={deletePost}
+                        openPostModal={openPostModal}
+                        edit
+                        delete
+                      />
+                    ))
+                  )}
                   {!postIds.length &&
                     !isFetchingPosts && (
                       <h3 className={styles.noMorePosts}>
@@ -101,6 +106,8 @@ class Main extends Component {
             </div>
           )}
 
+        {isFetchingCategories && isFetchingPosts && <LoadingIndicator />}
+
         {!isFetchingCategories &&
           !isCategoryFound && (
             <Route exact path={this.props.match.url} component={NotFoundPage} />
@@ -117,6 +124,7 @@ const mapStateToProps = (state, props) => {
     posts: state.postById,
     sortField: state.ui.sortBy,
     isFetchingCategories: state.isFetching.categories,
+    isFetchingPossts: state.isFetching.posts,
     isCategoryFound: isCategoryFoundSelector(
       state,
       props.match.params.category
