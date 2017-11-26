@@ -1,6 +1,7 @@
 import { normalize } from "normalizr";
 import { commentListSchema } from "./schema";
 import { CLOSE_COMMENT_MODAL } from "./ui";
+import { API_DOMAIN } from "./const";
 
 export const FETCH_COMMENTS_SUCCESS = "FETCH_COMMENTS_SUCCESS";
 export const FETCH_COMMENTS_REQUEST = "FETCH_COMMENTS_REQUEST";
@@ -9,8 +10,6 @@ export const NEW_COMMENT = "NEW_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const INCREMENT_COMMENT_VOTE = "INCREMENT_COMMENT_VOTE";
 export const DECREMENT_COMMENT_VOTE = "DECREMENT_COMMENT_VOTE";
-
-const API_DOMAIN = "http://localhost:3001";
 
 export const fetchCommentsByPost = postId => dispatch => {
   const url = `${API_DOMAIN}/posts/${postId}/comments`;

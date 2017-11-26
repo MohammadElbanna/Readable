@@ -1,7 +1,7 @@
+import { API_DOMAIN } from "./const";
+
 export const FETCH_CATEGORIES_SUCCESS = "FETCH_CATEGORIES_SUCCESS";
 export const FETCH_CATEGORIES_REQUEST = "FETCH_CATEGORIES_REQUEST";
-
-const API_DOMAIN = "http://localhost:3001";
 
 export const fetchCategories = () => dispatch => {
   dispatch({ type: FETCH_CATEGORIES_REQUEST });

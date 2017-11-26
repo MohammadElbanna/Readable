@@ -1,6 +1,7 @@
 import { normalize } from "normalizr";
 import { postListSchema } from "./schema";
 import { CLOSE_POST_MODAL } from "./ui";
+import { API_DOMAIN } from "./const";
 
 export const FETCH_POSTS_SUCCESS = "FETCH_POSTS_SUCCESS";
 export const FETCH_POSTS_REQUEST = "FETCH_POSTS_REQUEST";
@@ -16,8 +17,6 @@ export const DECREMENT_POST_VOTE_ERROR = "DECREMENT_POST_VOTE_ERROR";
 export const DELETE_POST = "DELETE_POST";
 export const EDIT_POST = "EDIT_POST";
 export const NEW_POST = "NEW_POST";
-
-const API_DOMAIN = "http://localhost:3001";
 
 export const fetchPosts = category => dispatch => {
   const url = category
